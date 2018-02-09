@@ -1,0 +1,25 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": "",
+    "region": "us-west-2"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{user `aws_access_key`}}",
+      "secret_key": "{{user `aws_secret_key`}}",
+      "ami_name": "packer-test-{{timestamp}}",
+      "instance_type": "t2.micro",
+      "region": "{{user `region`}}",
+      "source_ami": "ami-79873901",
+      "ssh_username": "ubuntu"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "./app.sh"
+    }
+  ]
+}
